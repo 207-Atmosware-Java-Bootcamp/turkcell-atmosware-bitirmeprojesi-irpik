@@ -1,0 +1,35 @@
+<!-- Modal Login -->
+<div th:fragment="modal-login" class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title  mx-auto" id="loginModalLabel"><b>Login</b></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div th:if="${param.error}" class="text-danger text-center mt-1">
+                <span class="ml-2">Invalid email and password.</span>
+                <script>swal("Invalid email and password.");</script>
+            </div>
+            <form th:action="@{/login}" th:method="post">
+                <div class="modal-body my-4">
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" name="username" id="username" placeholder="name@example.com">
+                        <label for="username">Email address</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                        <label for="password">Password</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="remember-me" id="remember"/>
+                        <label th:text="#{login.rememberme}" class="form-check-label" for="remember"/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+<!-- Modal Register -->
+<div th:fragment="modal-register">
+    <div  class="modal fade" id="signIn-modal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title  mx-auto" id="registerModalLabel"><b>Register</b></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form th:action="@{/usersave}" th:object="${user}" th:method="post">
+                    <div class="modal-body my-4">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="firstName" th:field="*{firstName}"
+                                   id="firstName" placeholder="First Name">
+                            <label for="firstName">First Name</label>
+                            <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="text-danger"></div>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="lastName" th:field="*{lastName}"
+                                   id="lastName" placeholder="Last Name">
+                            <label for="lastName">Last Name</label>
+                            <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="text-danger"></div>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="email" th:field="*{email}"
+                                   id="email" placeholder="name@example.com">
+                            <label for="email">Email address</label>
+                            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></div>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" name="password" th:field="*{password}"
+                                   id="password" placeholder="Password">
+                            <label for="password">Password</label>
+                            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- sweet alert user register, fail messages -->
+    <div th:if="${savesuccess}">
+        <script>swal("Successful registration.", "You can login.", "success");</script>
+    </div>
+    <div th:if="${saveerror}">
+        <script>swal("Registration failed.", "Please try again.", "error");</script>
+    </div>
+    <div th:if="${registered}">
+        <script>swal("Registered email address.", "Please enter a different email address.", "info");</script>
+    </div>
+</div>

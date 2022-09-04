@@ -1,0 +1,299 @@
+/*
+project name: My project one pages
+project author:Kadir Irpik
+project year: 2022
+project version: v.1
+*/
+/* config file */
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    position: relative;
+    font-family: 'Indie Flower', cursive, sans-serif;
+    font-weight: 100;
+}
+
+html{
+    font-size:15px;
+}
+
+ul{
+    list-style-type: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+p{
+    text-align: justify;
+}
+
+
+/* nav */
+.navbar-custom {
+    background-color: #113448;
+    box-shadow: none;
+    transition: all 0.2s;
+}
+.navbar-custom.top-nav-collapse {
+    padding: 0.375rem 1.5rem 0.375rem 2rem;
+    box-shadow: 0 0.0625rem 0.375rem 0 rgba(0, 0, 0, 0.1);
+    background-color: #113448;
+    opacity: .8;
+}
+.navbar .nav-link{
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+.navbar .nav-link:hover{
+    color: #F4D03F !important;;
+}
+
+.navbar-brand i{
+    color: #F4D03F;
+    font-size: 2rem;
+}
+/* back top */
+.back_top{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    background-color: #F4D03F;
+    color: #ffffff;
+    border: #14bf98;
+    border-radius: .3rem;
+    margin-right: .5rem;
+    margin-bottom: .5rem;
+    padding: .5rem 1.5rem;
+    z-index: 10;
+}
+.back_top:hover{
+    transition: .7s all;
+    box-shadow: 0 0 5px #113448;
+    color: #113448;
+}
+/* header */
+header{
+    background-image: url(../images/header2.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.9;
+    height: 120vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.headerTitle h1{
+    font-size: 3.5rem;
+    font-family: 'Indie Flower', cursive, sans-serif;
+    font-weight: 600;
+    color: #D5CC98;
+    position: relative;
+    animation: headerH1 2s ease;
+}
+@keyframes headerH1{
+    0%  {left:200px; top:200px;}
+    100% {left:0px; top:0px;}
+}
+
+.headerTitle h2{
+    font-family: 'Indie Flower', cursive, sans-serif;
+    font-weight: 500;
+    color: #D5CC98;
+    position: relative;
+    animation: headerH2 2s ease;
+}
+@keyframes headerH2{
+    0%  {left:200px; bottom:200px;}
+    100% {left:0px; bottom:0px;}
+}
+/* main */
+/*hakkımda*/
+.hakkimda .img-container{
+    overflow: hidden;
+    border-radius: 0.25rem;
+}
+.hakkimda .img-container img {
+    margin: 0;
+    border-radius: 0.25rem;
+    transition: all 0.3s;
+}
+.hakkimda .img-container:hover img {
+    -moz-transform: scale(1.15);
+    -webkit-transform: scale(1.15);
+    transform: scale(1.15);
+}
+
+/* teknolojiler */
+.teknolojiler i{
+    font-size: 2.2rem;
+}
+.teknolojiler .teknoloji-adi{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.progress-container div{
+    margin-bottom: .3rem;
+}
+.icon-img-spring{
+    width: 1.5rem;
+}
+.progress-bar.spring {
+    width: 70%;
+}
+.icon-img-java{
+    width: 2rem;
+}
+.progress-bar.java {
+    width: 85%;
+}
+.icon-img-hibernate{
+    width: 1.5rem;
+}
+.progress-bar.hibernate {
+    width: 70%;
+}
+.icon-img-html{
+    width: 1.3rem;
+}
+.progress-bar.html {
+    width: 90%;
+}
+.icon-img-css{
+    width: 1.5rem;
+}
+.progress-bar.css {
+    width: 65%;
+}
+.icon-img-bootstrap{
+    width: 1.5rem;
+}
+.progress-bar.bootstrap {
+    width: 70%;
+}
+.icon-img-javascript{
+    width: 1.5rem;
+}
+.progress-bar.javascript {
+    width: 80%;
+}
+.icon-img-jsp{
+    width: 1.8rem;
+}
+.progress-bar.jsp {
+    width: 70%;
+}
+.icon-img-mysql{
+    width: 1.8rem;
+}
+.progress-bar.mysql {
+    width: 90%;
+}
+.icon-img-mongodb{
+    width: 1.8rem;
+}
+.progress-bar.mongodb {
+    width: 60%;
+}
+.icon-img-git{
+    width: 3rem;
+}
+.icon-img-github{
+    width: 1.8rem;
+}
+
+/* Portfolio */
+.portfolio .img-portfolio {
+    position: relative;
+    overflow: hidden;
+}
+.portfolio .img-portfolio img{
+    transition: all 0.3s;
+}
+.portfolio .img-portfolio:hover img{
+    filter: grayscale(50%);
+    -moz-transform: scale(1.15);
+    -webkit-transform: scale(1.15);
+    transform: scale(1.15);
+}
+/* İletişim */
+.iletisim{
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+}
+.iletisim-paragraf{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: large;
+    text-decoration: underline;
+}
+.iletisim-paragraf a{
+    color: black;
+}
+.iletisim .fa-stack {
+    font-size: 1.7rem;
+}
+.iletisim .fa-stack .hexagon {
+    color: white;
+    position: absolute;
+    width: 3.25rem;
+    height: 3.25rem;
+    background: url('../icons/hexagon-green.svg') center center no-repeat;
+    background-size: 3.25rem 3.25rem;
+    transition: all 0.2s ease;
+}
+.iletisim .fa-stack:hover .hexagon {
+    background: url('../icons/hexagon-white.svg') center center no-repeat;
+    background-size: 3.25rem 3.25rem;
+    color: #14bf98;
+}
+.gonder-btn{
+    background-color: #14bf98;
+    color: rgb(255, 255, 255);
+    border: 1px solid #14bf98;
+    padding: 1rem;
+}
+.gonder-btn:hover{
+    background-color:rgb(255, 255, 255);
+    color: #14bf98;
+    border: 1px solid #14bf98;
+}
+/* Footer */
+footer{
+    background-color: #113448;
+    color: #ffffff;
+}
+/* Section: Links */
+.products .row div a:hover{
+    color: #F4D03F!important;
+}
+/* Media Query */
+@media (max-width: 767px) {
+    /* start header */
+    .headerTitle h1{
+        font-size: 2.6rem;
+    }
+    .headerTitle h2{
+        font-size: 1.5rem;
+    }
+    /* end header*/
+}
+
+@media (min-width: 768px) {
+    /* start nav */
+    .navbar-custom{
+        padding: 2.125rem 1.5rem 2.125rem 2rem;
+        box-shadow: none;
+        background: transparent;
+    }
+    .navbar .nav-link:hover{
+        box-shadow: 0 2px 0 0 #F4D03F;
+    }
+    /* end nav */
+}

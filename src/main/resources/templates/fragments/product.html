@@ -1,0 +1,107 @@
+<!doctype html>
+<html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<!-- title-->
+<title>Kadir İrpik</title>
+<!-- favicon -->
+<link rel="icon" type="image/x-icon" href="">
+
+<!-- Turkce karakter -->
+<meta charset="utf-8" />
+
+<!-- responsive design -->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- seo -->
+<meta name="keywords" content="html5,css3,js,jquery,bootstrap,es5,es6" />
+<meta name="description" content="one pages, html5,css3,js,jquery,bootstrap,seo" />
+<meta name="author" content="Kadir İrpik" />
+
+<!-- Google Fonts-->
+<!-- <link href="https://fonts.googleapis.com/css2?family=Crimson+Text&family=Quicksand:wght@300&display=swap"
+    rel="stylesheet"> -->
+<link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+<!-- Font awesome-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+
+<!-- Bootstrap CSS v5.0.2 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+
+<!-- jquery UI -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<!--sweet alert-->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- External CSS -->
+<link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+<body>
+<!-- start codes -->
+
+<div th:fragment="products" class="container my-3">
+    <h2 class="text-center text-warning">Products</h2>
+    <div sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_WRITER')">
+        <a th:href="@{/add/product}" class="btn btn-success mb-2"><i class="fa-solid fa-plus"></i> Add Product</a>
+    </div>
+    <table class="table table-hover table-striped text-center" id="productsList">
+        <thead>
+            <tr>
+                <th th:text="#{product.name}" class="uppercase"></th>
+                <th th:text="#{product.trade}" class="uppercase"></th>
+                <th th:text="#{product.serial.number}" class="uppercase"></th>
+                <th th:text="#{product.price}" class="uppercase"></th>
+                <th th:text="#{product.update}" class="uppercase" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_WRITER')"></th>
+                <th th:text="#{product.delete}" class="uppercase" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_WRITER')"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:if="${product.id>0}" th:each="product:${productList}">
+                <td th:text="${product.productName}"></td>
+                <td th:text="${product.productTrade}"></td>
+                <td th:text="${product.productSerialNumber}"></td>
+                <td th:text="${product.productPrice}"></td>
+                <td sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_WRITER')">
+                    <a th:href="@{/update/product/{id}(id=${product.id})}" class="btn btn-info btn-sm">
+                    <i class="fa-solid fa-wrench"></i>
+                    </a>
+                    <script th:if="${notFoundProduct}">
+                        swal("The product was not found.", {
+                            icon: "error",
+                        });
+                    </script>
+                    <script th:if="${updateSuccess}">
+                        swal("Update successful.", {
+                            icon: "success",
+                        });
+                    </script>
+                    <script th:if="${updateError}">
+                        swal("Update failed.", {
+                            icon: "error",
+                        });
+                    </script>
+                </td>
+                <td sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_WRITER')">
+                    <a class="btn btn-danger" th:onclick="'deleteSweetAlertProduct(\'/delete/product/' + ${product.id} +'\')'">
+                    <i class="fa-solid fa-trash-can"></i></a>
+                    <script th:if="${deleteSuccess}">
+                        swal("The record has been deleted successfully.", {
+                            icon: "success",
+                        });
+                    </script>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- ends codes -->
+<!-- Bootstrap JavaScript Libraries -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+<!-- External JS -->
+<script th:src="@{/js/javascript.js}"></script>
+</body>
+</html>

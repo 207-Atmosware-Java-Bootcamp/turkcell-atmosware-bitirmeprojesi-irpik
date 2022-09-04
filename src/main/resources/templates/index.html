@@ -1,0 +1,465 @@
+<!doctype html>
+<html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<!-- title-->
+<title>Kadir İrpik</title>
+<!-- favicon -->
+<link rel="icon" type="image/x-icon" href="">
+
+<!-- Turkce karakter -->
+<meta charset="utf-8" />
+
+<!-- responsive design -->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- seo -->
+<meta name="keywords" content="html5,css3,js,jquery,bootstrap,es5,es6" />
+<meta name="description" content="one pages, html5,css3,js,jquery,bootstrap,seo" />
+<meta name="author" content="Kadir İrpik" />
+
+<!-- Google Fonts-->
+<!-- <link href="https://fonts.googleapis.com/css2?family=Crimson+Text&family=Quicksand:wght@300&display=swap"
+    rel="stylesheet"> -->
+<link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+<!-- Font awesome-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+
+<!-- Bootstrap CSS v5.0.2 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+
+<!-- jquery UI -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<!--sweet alert-->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- dataTables CSS: paging and sorting -->
+<link rel="stylesheet" 	type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.css" />
+<!-- External CSS -->
+<link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+<body data-bs-target="#navbar_scroll" data-bs-spy="scroll">
+<!-- start codes -->
+<!-- back top satart -->
+<a href="#header" class="back_top"><i class="fa-solid fa-arrow-up"> Top</i></a>
+<!-- back top end -->
+<!-- navbar start -->
+<nav class="navbar navbar-expand-md navbar-dark fixed-top navbar-custom">
+    <div class="container-fluid" id="navbar_scroll">
+        <a class="navbar-brand" href="index"><i class="fa-solid fa-laptop-code"></i></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item ">
+                    <a class="nav-link" href="#header">Home Page</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#hakkimda">About</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="#teknolojiler">Technologies</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#portfolio">Portfolio</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="#iletisim">Contact</a>
+                </li>
+            </ul>
+            <th:block sec:authorize="!isAuthenticated()">
+                <div class="dropdown">
+                    <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        Login/Sign In
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#login-modal">Login</a></li>
+                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#signIn-modal">Sign In</a></li>
+                    </ul>
+                </div>
+            </th:block>
+            <th:block sec:authorize="isAuthenticated()">
+                <div class="dropdown">
+                    <button class="btn btn-warning dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="fw-bold">
+                            <span><i class="fa-solid fa-user"></i></span>
+                            <span th:text="${session.userDtoFirstName}"></span>
+                            <span th:text="${session.userDtoLastName}"></span>
+                        </div>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                        <form id="logoutForm" method="POST" th:action="@{/logout}">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            <li><button class="dropdown-item" th:type="submit">Logout</button></li>
+                        </form>
+                    </ul>
+                </div>
+            </th:block>
+        </div>
+    </div>
+</nav>
+<!-- navbar ends -->
+<th:block sec:authorize="!isAuthenticated()">
+    <!-- Modal Login -->
+    <th:block th:insert="fragments/login :: modal-login"></th:block>
+    <!-- Modal Register -->
+    <th:block th:insert="fragments/register :: modal-register"></th:block>
+</th:block>
+<!-- header start -->
+<header class="text-start p-5" id="header">
+    <div class="pb-5 headerTitle">
+        <h1 th:text="#{name}"></h1>
+        <h2 th:text="#{header.text}"></h2>
+    </div>
+</header>
+<!-- header ends -->
+
+<!-- main start -->
+<main>
+    <!-- hakkımda -->
+    <section class="mt-5 hakkimda" id="hakkimda">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 pt-5 pe-5">
+                    <h3><b>About</b></h3>
+                    <p class="text-muted" th:text="#{about.text}"></p>
+                </div>
+                <div class="col-lg-7">
+                    <div class="img-container">
+                        <img class="img-fluid" th:src="@{/images/hakkımda.jpg}" alt="hakkımda resim">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- teknolojiler -->
+    <section class="mt-5" id="teknolojiler">
+        <div class="container">
+            <div class="row teknolojiler">
+                <div class="col-lg-4 mt-3">
+                    <p class="text-lg-start text-sm-center text-primary"><i class="fa-solid fa-gears"></i></p>
+                    <p class="teknoloji-adi text-lg-start text-sm-center">Backend Technologies</p>
+                    <div class="progress-container text-lg-start text-sm-center">
+                        <div ><img class="icon-img-spring" th:src="@{/icons/spring.svg}" alt="sprin-icon"> Spring Boot 70%</div>
+                        <div class="progress">
+                            <div class="progress-bar spring" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div ><img class="icon-img-java" th:src="@{/icons/java-original.svg}" alt="java-icon">Java 85%</div>
+                        <div class="progress">
+                            <div class="progress-bar java" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div ><img class="icon-img-hibernate" th:src="@{/icons/hibernate.svg}" alt="hibernate-icon">JPA/Hibernate 70%</div>
+                        <div class="progress">
+                            <div class="progress-bar hibernate" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mt-3">
+                    <p class="text-lg-start text-sm-center text-danger"><i class="fa-solid fa-code"></i></p>
+                    <p class="teknoloji-adi text-lg-start text-sm-center">Frontend Technologies</p>
+                    <div class="progress-container text-lg-start text-sm-center">
+                        <div ><img class="icon-img-html" th:src="@{/icons/html-5.svg}" alt="html-icon"> HTML5 90%</div>
+                        <div class="progress">
+                            <div class="progress-bar html" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div ><img class="icon-img-css" th:src="@{/icons/css-3.svg}" alt="css-icon">CSS3 65%</div>
+                        <div class="progress">
+                            <div class="progress-bar css" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div ><img class="icon-img-bootstrap" th:src="@{/icons/bootstrap.svg}" alt="bootstrap-icon">Bootstrap 70%</div>
+                        <div class="progress">
+                            <div class="progress-bar bootstrap" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div ><img class="icon-img-javascript" th:src="@{/icons/javascript-js.svg}" alt="js-icon">JavaScript 80%</div>
+                        <div class="progress">
+                            <div class="progress-bar javascript" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div ><img class="icon-img-jsp" th:src="@{/icons/file-type-jsp.svg}" alt="jsp-icon">JSP 70%</div>
+                        <div class="progress">
+                            <div class="progress-bar jsp" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mt-3">
+                    <p class="text-lg-start text-sm-center"><i class="fa-solid fa-database"></i></p>
+                    <p class="teknoloji-adi text-lg-start text-sm-center">Database Technologies</p>
+                    <div class="progress-container text-lg-start text-sm-center">
+                        <div ><img class="icon-img-mysql" th:src="@{/icons/mysql-original-wordmark.svg}" alt="mysql-icon">Mysql 90%</div>
+                        <div class="progress">
+                            <div class="progress-bar mysql" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div ><img class="icon-img-mongodb" th:src="@{/icons/mongodb-icon.svg}" alt="mongodb-icon">MongoDb 60%</div>
+                        <div class="progress">
+                            <div class="progress-bar mongodb" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="fw-bold">Versiyon Kontrol</div>
+                        <div ><img class="icon-img-git" th:src="@{/icons/git.svg}" alt="git-git"> Git</div>
+                        <div ><img class="icon-img-github" th:src="@{/icons/github.svg}" alt="github-git"> GitHub</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product -->
+    <th:block th:insert="fragments/product :: products"></th:block>
+    <!-- Portfolio -->
+    <section class="mt-5" id="portfolio">
+        <div class="container portfolio">
+            <h2 class="text-center my-2">Portfolio</h2>
+            <div class="row">
+                <div class="col-sm-6 col-lg-3 p-0 img-portfolio">
+                    <img class="img-fluid" th:src="@{/images/project-1.jpg}" width="100%" alt="resim1">
+                </div>
+                <div class="col-sm-6 col-lg-3 p-0 img-portfolio">
+                    <img class="img-fluid" th:src="@{/images/project-2.jpg}" width="100%" alt="resim2">
+                </div>
+                <div class="col-sm-6 col-lg-3 p-0 img-portfolio">
+                    <img class="img-fluid" th:src="@{/images/project-3.jpg}" width="100%" alt="resim3">
+                </div>
+                <div class="col-sm-6 col-lg-3 p-0 img-portfolio">
+                    <img class="img-fluid" th:src="@{/images/project-4.jpg}" width="100%" alt="resim4">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-lg-3 p-0 img-portfolio">
+                    <img class="img-fluid" th:src="@{/images/project-5.jpg}" width="100%" alt="resim5">
+                </div>
+                <div class="col-sm-6 col-lg-3 p-0 img-portfolio">
+                    <img class="img-fluid" th:src="@{/images/project-6.jpg}" width="100%" alt="resim6">
+                </div>
+                <div class="col-sm-6 col-lg-3 p-0 img-portfolio">
+                    <img class="img-fluid" th:src="@{/images/project-7.jpg}" width="100%" alt="resim7">
+                </div>
+                <div class="col-sm-6 col-lg-3 p-0 img-portfolio">
+                    <img class="img-fluid" th:src="@{/images/project-8.jpg}" width="100%" alt="resim8">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- İletişim -->
+    <section class="mt-5" id="iletisim">
+        <div class="container iletisim">
+            <div class="row">
+                <div class="col-sm-12 col-lg-6">
+                    <h4><b>Get in touch using the form</b></h4>
+                    <p>For any questions or inquiries, please contact below.
+                        You can use the form.
+                    </p>
+                    <p>
+                        <span class="text-success"><i class="fa-solid fa-location-dot"></i></span>
+                        Ankara/TÜRKİYE
+                    </p>
+                    <p class="iletisim-paragraf">
+                            <span class="me-3">
+                                <span class="text-success me-1"><i class="fa-solid fa-phone-flip"></i></span>
+                                <a href="tel:+901234567898">+ 01 111 222 33</a>
+                            </span>
+                        <span class="me-3">
+                                <span class="text-success me-1"><i class="fas fa-print"></i></span>
+                                <a href="tel:+901234567899">+ 01 111 222 33</a>
+                            </span>
+                        <span>
+                                <span class="text-success me-1"><i class="fa-solid fa-envelope"></i></span>
+                                <a href="mailto:kadirirpik17@gmail.com">kadirirpik17@gmail.com</a>
+                            </span>
+
+                    </p>
+                    <!--sosyal medya iconlar-->
+                    <p>
+                    <h6><b>Social Media</b></h6>
+                    <span class="fa-stack">
+                                <a href="#">
+                                    <span class="hexagon"><i class="fab fa-facebook-f fa-stack-1x"></i></span>
+                                </a>
+                            </span>
+                    <span class="fa-stack">
+                                <a href="#">
+                                    <span class="hexagon"><i class="fab fa-twitter fa-stack-1x"></i></span>
+                                </a>
+                            </span>
+                    <span class="fa-stack">
+                                <a href="#">
+                                    <span class="hexagon"><i class="fab fa-google fa-stack-1x"></i></span>
+                                </a>
+                            </span>
+                    <span class="fa-stack">
+                                <a href="#">
+                                    <span class="hexagon"><i class="fab fa-instagram fa-stack-1x"></i></span>
+                                </a>
+                            </span>
+                    <span class="fa-stack">
+                                <a href="#">
+                                    <span class="hexagon"><i class="fab fa-linkedin-in fa-stack-1x"></i></span>
+                                </a>
+                            </span>
+                    <span class="fa-stack">
+                                <a href="#">
+                                    <span class="hexagon"><i class="fab fa-github fa-stack-1x"></i></span>
+                                </a>
+                            </span>
+                    </p>
+                </div>
+                <div class="col-sm-12 col-lg-6">
+                    <form action="/mail" th:object="${mailDto}" method="post">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="name" name="name" th:field="*{name}" placeholder="Your Name">
+                            <label for="name">Your Name</label>
+                            <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></div>
+                        </div>
+                        <div class="form-floating my-3">
+                            <input type="email" class="form-control" id="from" name="from" th:field="*{from}" placeholder="name@example.com">
+                            <label for="from">Email Address</label>
+                            <div th:if="${#fields.hasErrors('from')}" th:errors="*{from}" class="text-danger"></div>
+                        </div>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="subject" name="subject" th:field="*{subject}" placeholder="Subject">
+                            <label for="subject">Subject</label>
+                            <div th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}" class="text-danger"></div>
+                        </div>
+                        <div class="form-floating my-3">
+                            <textarea class="form-control" id="content" name="content" th:field="*{content}" placeholder="Messages" style="height: 100px"></textarea>
+                            <label for="content">Your Message</label>
+                            <div th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="text-danger"></div>
+                        </div>
+                        <div>
+                            <input class="btn gonder-btn w-100" type="submit" value="Send Message">
+                        </div>
+                    </form>
+                    <th:block th:if="${mailSendSuccess}">
+                        <script>swal("Successful", "Email sent.", "success");</script>
+                    </th:block>
+                    <th:block th:if="${mailSendError}">
+                        <script>swal("Failed to send", "Please try again later.", "error");</script>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<!-- main ends -->
+<!-- footer start -->
+<footer class="mt-5">
+    <!-- Section: Social media -->
+    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom align-items-center">
+        <!-- Left -->
+        <div class="me-5 d-none d-lg-block text-align-center">
+            <span>Get connected with us on social networks:</span>
+        </div>
+        <!-- Right -->
+        <div>
+            <a href="" class="me-2 text-reset btn btn-outline-primary btn-floating">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="" class="me-2 text-reset btn btn-outline-warning btn-floating">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="" class="me-2 text-reset btn btn-outline-danger btn-floating">
+                <i class="fab fa-google"></i>
+            </a>
+            <a href="" class="me-2 text-reset btn btn-outline-info btn-floating">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="" class="me-2 text-reset btn btn-outline-light btn-floating">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="" class="me-2 text-reset  btn btn-outline-dark btn-floating">
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
+    </section>
+    <!-- Section: Links  -->
+    <section class="">
+        <div class="container text-center text-md-start mt-5">
+            <div class="row mt-3">
+                <div class="col-sm-12 col-md-4 text-center mb-4">
+                    <!-- Content -->
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        <i class="fas fa-gem me-3"></i>KADİR İRPİK
+                    </h6>
+                    <p class="text-center">Back-End</p>
+                    <p class="text-center">Front-End</p>
+                    <p class="text-center">MVC</p>
+                    <p class="text-center">Rest</p>
+                    <p class="text-center">Security</p>
+                </div>
+                <div class="col-sm-12 col-md-4 mx-auto mb-4 products">
+                    <h6 class="text-uppercase fw-bold mb-4 text-center">
+                        Products
+                    </h6>
+                    <div class="row">
+                        <div class="col-6">
+                            <p class="text-end">
+                                <a href="#" class="text-reset">Java</a>
+                            </p>
+                            <p class="text-end">
+                                <a href="#" class="text-reset">Spring Boot</a>
+                            </p>
+                            <p class="text-end">
+                                <a href="#" class="text-reset">Hibernate</a>
+                            </p>
+                            <p class="text-end">
+                                <a href="#" class="text-reset">MySql</a>
+                            </p>
+                            <p class="text-end">
+                                <a href="#" class="text-reset">PostgreSql</a>
+                            </p>
+                            <p class="text-end">
+                                <a href="#" class="text-reset">MongoDb</a>
+                            </p>
+                        </div>
+                        <div class="col-6">
+                            <p>
+                                <a href="#" class="text-reset">JSP</a>
+                            </p>
+                            <p>
+                                <a href="#" class="text-reset">Thymeleaf</a>
+                            </p>
+                            <p>
+                                <a href="#" class="text-reset">HTML</a>
+                            </p>
+                            <p>
+                                <a href="#" class="text-reset">CSS</a>
+                            </p>
+                            <p>
+                                <a href="#" class="text-reset">JavaScript</a>
+                            </p>
+                            <p>
+                                <a href="#" class="text-reset">Bootstrap</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-sm-12 col-md-4 mx-auto mb-md-0 mb-4 d-flex flex-column align-items-center">
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        Contact
+                    </h6>
+                    <p><i class="fas fa-home me-3"></i><span th:text="#{contact.map}"></span> </p>
+                    <p>
+                        <i class="fas fa-envelope me-3"></i>
+                        <span th:text="#{contact.mail}"></span>
+                    </p>
+                    <p><i class="fas fa-phone me-3"></i> <span th:text="#{contact.phone}"></span></p>
+                    <p><i class="fas fa-print me-3"></i> <span th:text="#{contact.fax}"></span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Copyright -->
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+        &copy; <span th:text="#{contact.copyright}"></span>
+        <a class="text-reset fw-bold" th:href="#{contact.copyright.url}"><span th:text="#{contact.copyright.name}"></span></a>
+    </div>
+</footer>
+<!-- ends codes -->
+<!-- Bootstrap JavaScript Libraries -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.js"></script>
+<script src="/js/product.js"></script>
+<!-- External JS -->
+<script th:src="@{/js/javascript.js}"></script>
+</body>
+</html>
